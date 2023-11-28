@@ -1,8 +1,5 @@
 package org.example.letcode.solution3;
 
-import java.util.HashMap;
-import java.util.Map;
-
 class Solution {
     public static void main(String[] args) {
         System.out.println(new Solution().lengthOfLongestSubstring("au"));
