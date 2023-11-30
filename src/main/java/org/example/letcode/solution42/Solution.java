@@ -1,31 +1,38 @@
 package org.example.letcode.solution42;
 
+import java.util.List;
+import java.util.Map;
+
 class Solution {
     public static void main(String[] args) {
-        new Solution().trap(new int[]{0,1,0,2,1,0,1,3,2,1,2,1});
+        System.out.println(new Solution().trap(new int[]{4,2,0,3,2,5}));
     }
     public int trap(int[] height) {
-        int max=0;
-        for (int i:height){
-            if(i>max)
-                max=i;
+        if (height == null || height.length <= 2) {
+            return 0;
         }
-        int[][] array = new int[height.length][max];
-        for(int i =0;i<height.length;i++){
-            for(int j = 0; j < max;j++){
-                if(j<height[i]){
-                    array[i][j] = 1;
-                }else {
-                    array[i][j] = 0;
-                }
-            }
+
+        int n = height.length;
+        int[] leftMax = new int[n];
+        int[] rightMax = new int[n];
+
+        leftMax[0] = height[0];
+        for (int i = 1; i < n; i++) {
+            leftMax[i] = Math.max(leftMax[i - 1], height[i]);
         }
-        for (int i = max-1;i>=0;i--){
-            for (int j = 0;j<height.length;j++){
-                System.out.print(array[j][i] + " ");
-            }
-            System.out.println();
+
+        rightMax[n - 1] = height[n - 1];
+        for (int i = n - 2; i >= 0; i--) {
+            rightMax[i] = Math.max(rightMax[i + 1], height[i]);
         }
-        return -1;
+
+        int trappedWater = 0;
+
+        for (int i = 0; i < n; i++) {
+            int minHeight = Math.min(leftMax[i], rightMax[i]);
+            trappedWater += Math.max(0, minHeight - height[i]);
+        }
+
+        return trappedWater;
     }
 }
