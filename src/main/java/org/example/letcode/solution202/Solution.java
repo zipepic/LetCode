@@ -1,7 +1,6 @@
-package org.example.letcode.solutin202;
+package org.example.letcode.solution202;
 
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 public class Solution {
